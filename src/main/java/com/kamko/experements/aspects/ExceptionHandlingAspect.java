@@ -1,5 +1,6 @@
 package com.kamko.experements.aspects;
 
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.core.annotation.Order;
@@ -13,6 +14,12 @@ public class ExceptionHandlingAspect {
     public void beforeAddExceptionHandlingAdvice() {
         System.out.println("beforeAddExceptionHandlingAdvice: " +
                 "поимка/обработка исключения при попытке добавить товар");
+    }
+
+    @AfterThrowing(pointcut = "com.kamko.experements.aspects.Pointcuts.pointcutForAddMethod()",
+            throwing = "exception")
+    public void afterThrowingAddLoggingAdvice(Throwable exception) {
+        System.out.println("Было поймано исключение: " + exception);
     }
     @Before("com.kamko.experements.aspects.Pointcuts.pointcutForUpdateMethod()")
     public void beforeUpdateExceptionHandlingAdvice() {

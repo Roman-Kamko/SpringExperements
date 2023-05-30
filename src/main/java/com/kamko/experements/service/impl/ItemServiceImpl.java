@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Map;
@@ -31,15 +32,13 @@ public class ItemServiceImpl implements ItemService {
             String price,
             int amount,
             LocalDate manufactureDate,
-            int expiration
-    ) {
+            int expiration) {
         return repository.add(
                 name,
                 price,
                 amount,
                 manufactureDate,
-                expiration
-        );
+                expiration);
     }
 
     @Override

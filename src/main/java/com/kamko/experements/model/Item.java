@@ -24,10 +24,10 @@ public class Item {
                 LocalDate manufactureDate,
                 int expiration) {
         this.name = name;
-        this.price = new BigDecimal(price);
-        this.amount = amount;
+        setPrice(price);
+        setAmount(amount);
         this.manufactureDate = manufactureDate;
-        this.expiration = expiration;
+        setExpiration(expiration);
         id = ++counter;
     }
 
@@ -47,8 +47,10 @@ public class Item {
         return price.setScale(2, RoundingMode.HALF_UP);
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setPrice(String price) {
+        BigDecimal result = new BigDecimal(price);
+        checkNumByZero(result.intValue());
+        this.price = result;
     }
 
     public int getAmount() {
@@ -56,6 +58,7 @@ public class Item {
     }
 
     public void setAmount(int amount) {
+        checkNumByZero(amount);
         this.amount = amount;
     }
 
@@ -72,6 +75,7 @@ public class Item {
     }
 
     public void setExpiration(int expiration) {
+        checkNumByZero(expiration);
         this.expiration = expiration;
     }
 
@@ -94,5 +98,11 @@ public class Item {
                 "ID %d НАИМЕНОВАНИЕ %s ЦЕНА %,.2f КОЛ-ВО %d ДАТА_ПРОИЗВОДСТВА %tF СРОК_ГОДНОСТИ %d",
                 id, name, getPrice(), amount, manufactureDate, expiration
         );
+    }
+
+    private void checkNumByZero(int num) {
+        if (num < 0) {
+            throw new IllegalArgumentException();
+        }
     }
 }
