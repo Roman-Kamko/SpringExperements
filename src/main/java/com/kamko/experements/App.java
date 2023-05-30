@@ -13,7 +13,7 @@ public class App {
                 new AnnotationConfigApplicationContext(ConfigurationFile.class);
 
         ItemService service = context.getBean("itemServiceImpl", ItemServiceImpl.class);
-        System.out.println(service.add("Bear", "59.99", 100, LocalDate.of(2023, 5, 11), 60));
+        service.add("Bear", "59.99", 100, LocalDate.of(2023, 5, 11), 60);
 //        System.out.println(service.add("Lemonade", "89.99", 150, LocalDate.of(2022, 11, 7), 360));
 //        System.out.println(service.add("Water", "29.99", 300, LocalDate.of(2023, 2, 7), 360));
 //        service.printAll();
