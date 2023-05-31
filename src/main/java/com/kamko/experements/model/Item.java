@@ -1,17 +1,13 @@
 package com.kamko.experements.model;
 
-import com.kamko.experements.repository.ItemRepository;
-import com.kamko.experements.service.impl.ItemServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.Objects;
+
 public class Item {
     private static long counter;
-    private long id;
+    private final long id;
     private String name;
     private BigDecimal price;
     private int amount;
@@ -24,10 +20,10 @@ public class Item {
                 LocalDate manufactureDate,
                 int expiration) {
         this.name = name;
-        setPrice(price);
-        setAmount(amount);
+        this.price = new BigDecimal(price);
+        this.amount = amount;
         this.manufactureDate = manufactureDate;
-        setExpiration(expiration);
+        this.expiration = expiration;
         id = ++counter;
     }
 
@@ -48,9 +44,7 @@ public class Item {
     }
 
     public void setPrice(String price) {
-        BigDecimal result = new BigDecimal(price);
-        checkNumByZero(result.intValue());
-        this.price = result;
+        this.price = new BigDecimal(price);
     }
 
     public int getAmount() {
@@ -58,7 +52,6 @@ public class Item {
     }
 
     public void setAmount(int amount) {
-        checkNumByZero(amount);
         this.amount = amount;
     }
 
@@ -75,7 +68,6 @@ public class Item {
     }
 
     public void setExpiration(int expiration) {
-        checkNumByZero(expiration);
         this.expiration = expiration;
     }
 
@@ -99,10 +91,6 @@ public class Item {
                 id, name, getPrice(), amount, manufactureDate, expiration
         );
     }
-
-    private void checkNumByZero(int num) {
-        if (num < 0) {
-            throw new IllegalArgumentException();
-        }
-    }
 }
+
+
