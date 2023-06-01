@@ -1,12 +1,9 @@
-package com.kamko.experements.aspects;
+package com.kamko.experements.itemapp.aspects;
 
-import com.kamko.experements.model.Item;
+import com.kamko.experements.itemapp.model.Item;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.reflect.MethodSignature;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Order(1)
 public class LoggingAspect {
     @AfterReturning(
-            pointcut = "com.kamko.experements.aspects.Pointcuts.pointcutForAddMethod()",
+            pointcut = "com.kamko.experements.itemapp.aspects.Pointcuts.pointcutForAddMethod()",
             returning = "item")
     public void afterReturningAddItemLoggingAdvice(JoinPoint joinPoint, Item item) {
 //        // получение информации о методе с помощью joinPoint(для практики)
@@ -32,7 +29,7 @@ public class LoggingAspect {
                 "; Количество: " + itemCopy.getAmount());
     }
 
-    @Before("com.kamko.experements.aspects.Pointcuts.pointcutForAddMethod()")
+    @Before("com.kamko.experements.itemapp.aspects.Pointcuts.pointcutForAddMethod()")
     public void beforeAddLoggingAdvice(JoinPoint joinPoint) {
         Object[] arguments = joinPoint.getArgs();
         for (Object obj : arguments) {
@@ -43,9 +40,25 @@ public class LoggingAspect {
         }
     }
 
-    @Before("com.kamko.experements.aspects.Pointcuts.pointcutForUpdateMethod()")
-    public void beforeUpdateLoggingAdvice() {
-        // техническое сообщение
-        System.out.println("beforeUpdateLoggingAdvice: логирование, попытка изменить товаров");
+//    @Before("com.kamko.experements.itemapp.aspects.Pointcuts.pointcutForUpdateMethod()")
+//    public void beforeUpdateLoggingAdvice() {
+//        // техническое сообщение
+//        System.out.println("beforeUpdateLoggingAdvice: логирование, попытка изменить товаров");
+//    }
+
+    // Around advice
+    @Around("com.kamko.experements.itemapp.aspects.Pointcuts.pointcutForUpdateMethod()")
+    public Object aroundUpdateLoggingAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+
+        // before
+        System.out.println("aroundUpdateLoggingAdvice: логирование, попытка изменить товар");
+
+        // start target method
+        Object changedItem = proceedingJoinPoint.proceed();
+
+        // after
+        System.out.println("aroundUpdateLoggingAdvice: товар изменен");
+
+        return changedItem;
     }
 }

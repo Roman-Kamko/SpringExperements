@@ -1,12 +1,11 @@
-package com.kamko.experements.repository;
+package com.kamko.experements.itemapp.service;
 
-import com.kamko.experements.model.Item;
+import com.kamko.experements.itemapp.model.Item;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collection;
 
-public interface ItemRepository {
+public interface ItemService {
     Collection<Item> getAll();
 
     Item add(String name,
@@ -25,4 +24,6 @@ public interface ItemRepository {
                 int amount,
                 LocalDate manufactureDate,
                 int expiration);
+
+    void printAll();
 }

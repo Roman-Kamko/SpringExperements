@@ -1,4 +1,4 @@
-package com.kamko.experements.exceptions;
+package com.kamko.experements.itemapp.exceptions;
 
 public class IllegalIdException extends Exception {
     public IllegalIdException() {

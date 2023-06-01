@@ -1,14 +1,12 @@
-package com.kamko.experements.repository.impl;
+package com.kamko.experements.itemapp.repository.impl;
 
-import com.kamko.experements.exceptions.IllegalIdException;
-import com.kamko.experements.exceptions.IllegalParametersException;
-import com.kamko.experements.exceptions.ItemException;
-import com.kamko.experements.model.Item;
-import com.kamko.experements.repository.ItemRepository;
-import org.springframework.context.annotation.Lazy;
+import com.kamko.experements.itemapp.exceptions.IllegalIdException;
+import com.kamko.experements.itemapp.exceptions.IllegalParametersException;
+import com.kamko.experements.itemapp.exceptions.ItemException;
+import com.kamko.experements.itemapp.model.Item;
+import com.kamko.experements.itemapp.repository.ItemRepository;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -91,7 +89,7 @@ public class ItemRepositoryImpl implements ItemRepository {
     }
 
     private void validatePrice(String price) throws IllegalParametersException {
-        if (Long.parseLong(price) < 0) {
+        if (Double.parseDouble(price) < 0) {
             throw new IllegalParametersException();
         }
     }

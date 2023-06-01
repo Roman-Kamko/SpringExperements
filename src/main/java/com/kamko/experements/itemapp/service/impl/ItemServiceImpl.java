@@ -1,16 +1,13 @@
-package com.kamko.experements.service.impl;
+package com.kamko.experements.itemapp.service.impl;
 
-import com.kamko.experements.model.Item;
-import com.kamko.experements.repository.ItemRepository;
-import com.kamko.experements.service.ItemService;
+import com.kamko.experements.itemapp.model.Item;
+import com.kamko.experements.itemapp.repository.ItemRepository;
+import com.kamko.experements.itemapp.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Map;
 
 @Component
 public class ItemServiceImpl implements ItemService {

@@ -1,4 +1,4 @@
-package com.kamko.experements.exceptions;
+package com.kamko.experements.itemapp.exceptions;
 
 public class ItemException extends RuntimeException {
     public ItemException() {

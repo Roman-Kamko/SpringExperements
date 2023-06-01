@@ -1,4 +1,4 @@
-package com.kamko.experements.model;
+package com.kamko.experements.itemapp.model;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

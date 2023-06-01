@@ -1,4 +1,4 @@
-package com.kamko.experements.configuration;
+package com.kamko.experements.itemapp.configuration;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
